@@ -20,3 +20,13 @@ def test_extract_sra_accessions():
     text = "The study SRP123456 contains sequencing experiment SRX789012."
     result = extract_accessions(text)
     assert result == ["SRP123456", "SRX789012"]
+
+def test_extract_prjna_accessions():
+    text = "The sequencing data are associated with BioProject PRJNA123456."
+    result = extract_accessions(text)
+    assert result == ["PRJNA123456"]
+
+def test_accession_boundaries():
+    text = "GSE123456 is valid, but ABCGSE123456XYZ is not."
+    result = extract_accessions(text)
+    assert result == ["GSE123456"]
